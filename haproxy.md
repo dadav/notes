@@ -110,6 +110,29 @@ You can inspect the url with the following fetch methods:
 | path_reg      | regex match |
 | path_sub      | substring match |
 
+Some examples:
+```bash
+acl isimage path_reg (png|jpg|jpeg|gif)$
+acl islongerthan4 path_len gt 4
+acl isoldapi path_beg -i /api/v1
+acl isnewapi path_beg -i /api/v2
+```
+
+You could also use a URL parameter:
+```bash
+acl iswest url_param(region) -m str west # http://example.com/?region=west
+acl iswest url_param(region) -i -m str west # ignore case: http://example.com/?region=West
+acl iswest url_param(region) -i -m str west westcoast wc # multiple choices: http://example.com/?region=WC
+acl iswest url_param(region) -m reg .+ # any value: http://example.com/?region=asdhrt24r
+```
+
+By headers:
+
+```bash
+acl ismobile req.hdr(User-Agent) -i -m reg (android|iphone)
+acl ishost1 req.hdr(Host) -i -m str www.example.com
+```
+
 #### options
 ##### algorithms
 ###### roundrobin
@@ -169,3 +192,14 @@ backend test
   mode tcp
   server web 192.168.40.10:80 send-proxy
 ```
+
+#### Redirect
+```bash
+frontend mywebsite
+  bind *:80
+  default_backend webservers
+  acl isoldsite req.hdr(Host) -i -m str oldsite.com
+  redirect prefix http://newsite.com if isoldsite # http://oldsite.com/?test=1 will be http://newsite.com/?test=1
+```
+
+You could drop the query with `redirect prefix ... drop-query`
