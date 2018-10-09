@@ -202,4 +202,4 @@ frontend mywebsite
   redirect prefix http://newsite.com if isoldsite # http://oldsite.com/?test=1 will be http://newsite.com/?test=1
 ```
 
-You could drop the query with `redirect prefix ... drop-query`
+You could drop the query with `redirect prefix ... drop-query` or by using `redirect location`
