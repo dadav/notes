@@ -74,3 +74,10 @@ backend mywebservers
 
 ### listen
 This section combines the frontend and backend into one.
+
+It usually looks like this:
+```bash
+listen myproxy
+  bind 127.0.0.1:81
+  server nginx1 127.0.0.1:80
+```
