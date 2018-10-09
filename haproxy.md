@@ -1,5 +1,7 @@
 # haproxy
 ## config
+TIP: You can check the config with `haproxy -f haproxy.cfg -c`
+
 ### global
 The global section contains settings that apply to the HAProxy process itself.
 
@@ -54,8 +56,21 @@ defaults
 ### frontend
 Defines a reverse proxy that will listen for incoming requests on a certain IP and port.
 
+It usually looks like this:
+```bash
+frontend
+  bind 127.0.0.1:81
+  default_backend mywebservers
+```
+
 ### backend
 Defines a pool of servers that the frontend will forward requests to.
+
+It usually looks like this:
+```bash
+backend mywebservers
+  server nginx1 127.0.0.1:80
+```
 
 ### listen
 This section combines the frontend and backend into one.
