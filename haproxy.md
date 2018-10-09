@@ -134,6 +134,89 @@ acl ishost1 req.hdr(Host) -i -m str www.example.com
 ```
 
 #### options
+##### health
+You can check the backend servers like this (TCP):
+```bash
+# downinter 1m: check down server every 1m
+# inter 10s: check every 10 seconds
+# fall 2: server is seen as down if test failed 2 times
+# rise 5: server is seen as up if test succeded 5 times
+server web1 192.168.50.10:80 check downinter 1m inter 10s fall 2 rise 5
+```
+
+In http mode you have better check options:
+```bash
+backend webservers
+  mode http
+  balance roundrobin
+  server web1 192.168.50.10:80 check
+  option httpchk HEAD /testpage HTTP/1.1\r\nHost:\ mywebsite.com
+  # Optional tell haproxy which status is ok
+  http-check expect status 200 # only 200
+  # http-check expect rstatus ^2(\d){2}$ # 2xx
+```
+
+You can also rely on another server (from a backend):
+```bash
+backend reserv_service
+  mode http
+  server rs1 192.168.50.10:80 track databases/db1
+  
+ backend databases
+  mode tcp
+  server db1 192.168.60.10:1433 check # must use check here
+```
+
+You can also rely on another server (from a frontend):
+```bash
+frontend website
+  bind *:80
+  acl dbon srv_is_up(primary_databases/db1)
+  use_backend primary_service if dbon
+  default_backend backup_server
+```
+
+##### persistency
+With the following options you can tell haproxy how it should remember a server.
+
+###### cookie
+You can insert a cookie.
+
+```bash
+backend webservers
+  # indirect: remove cookie before send request to backends
+  # nocache: send private headers
+  cookie SERVERUSED insert indirect nocache
+  server web1 192.168.50.10:80 check cookie web1
+```
+
+###### stick-table
+A stick-table is a databse within haproxy.
+
+```bash
+backend webservers
+  mode tcp
+  server web1 192.168.50.10:80 check
+  server web2 192.168.50.11:80 check
+  stick-table type ip size 1m expire 30m
+  stick on src
+```
+
+You can also put it in an extra backend
+
+```bash
+backend mystorage
+  stick-table type ip size 1m expire 30m
+  
+backend webservers
+  mode tcp
+  server web1 192.168.50.10:80 check
+  server web2 192.168.50.11:80 check
+  stick on src table mystorage
+  # Dont wait for check to fail. If we cant connect, choose another server.
+  option redispatch
+```
+
 ##### algorithms
 ###### roundrobin
 Split the requests equally on every server. You can put a weight option on each server.
@@ -176,6 +259,27 @@ backend webservers
   server web1 192.168.50.10:80 maxconn 30
   server web2 192.168.50.11:80 maxconn 30
   server web3 192.168.50.12:80 maxconn 30
+```
+
+### Logging
+#### rsyslog
+```bash
+# If you chroot haproxy, you need this:
+$AddUnixListenSocket /var/lib/haproxy/dev/log
+
+if $programname startswith 'haproxy' then /var/log/haproxy.log
+& stop
+```
+
+TIP: You can use `log-tag` to differentiate each section in haproxy.
+
+If you want to split the error-logs of haproxy into different files, use the `log-separate-errors` option in the haproxy-config.
+In the rsyslog- config do the following:
+
+```bash
+if $programname startswith 'haproxy' then /var/log/haproxy.log
+
+if $programname startswith 'haproxy' and $syslogseverity <= 3 then /var/log/haproxy_errors.log
 ```
 
 ### Tips
