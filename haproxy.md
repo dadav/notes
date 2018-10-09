@@ -98,6 +98,18 @@ use_backend test if is_localhost is_get
 use_backend test2 if is_localhost or is_get
 ```
 
+You can inspect the url with the following fetch methods:
+
+| Method        | Info         |
+| ------------- |-------------|
+| path      | exact string match |
+| path_beg      | URL begins with string |
+| path_dir      | subdir match |
+| path_end      | suffix match |
+| path_len     | length match |
+| path_reg      | regex match |
+| path_sub      | substring match |
+
 #### options
 ##### algorithms
 ###### roundrobin
