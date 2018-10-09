@@ -3,6 +3,23 @@
 TIP: You can check the config with `haproxy -f haproxy.cfg -c`
 
 #### sections
+##### peers
+The peers section lists multiple haproxy machines and makes it possible to share stick-tables. The peer labes should match the machinenames.
+
+```bash
+peers mypeers
+        peer hostname1 192.168.50.10:50000
+        peer hostname2 192.168.50.11:50000
+
+listen mywebserver
+        bind *:80 transparent
+        balance roundrobin
+        server webserver 192.168.50.12:8080 check
+        stick-table type ip size 1m size 1m expire 30m peers mypeers
+        stick on src
+        
+```
+
 ##### global
 The global section contains settings that apply to the HAProxy process itself.
 
