@@ -6,10 +6,10 @@ The global section contains settings that apply to the HAProxy process itself.
 It usually looks like this:
 ```bash
 global
-  log /dev/log local0
-  log /dev/log local1 notice
-  chroot /var/lib/haproxy
-  stats socket /run/haproxy/admin.sock mode 660 level admin
+  log /dev/log local0 # Setup syslog
+  log /dev/log local1 notice 
+  chroot /var/lib/haproxy # Securityreasons
+  stats socket /run/haproxy/admin.sock mode 660 level admin # Socket for interaction
   stats timeout 30s
   user haproxy
   group haproxy
@@ -30,6 +30,26 @@ global
 
 ### defaults
 Here we can configure settings that a reused across all of the proxies.
+
+It usually looks like this:
+```bash
+defaults
+  log global # backreference to global section
+  mode http # layer7
+  option httplog # verbose
+  option dontlognull # skip logging iif request doesnt send any data
+  timeout connect 5000 # max millisecs to wait for a connection to a backend server
+  timeout client 50000 # max millisecs to wait for a response from a client
+  timeout server 50000 # max millisecs to wait for a response from a backendserver
+  errorfile 400 /etc/haproxy/errors/400.http # errorfiles
+  errorfile 403 /etc/haproxy/errors/403.http
+  errorfile 408 /etc/haproxy/errors/408.http
+  errorfile 500 /etc/haproxy/errors/500.http
+  errorfile 502 /etc/haproxy/errors/502.http
+  errorfile 503 /etc/haproxy/errors/503.http
+  errorfile 504 /etc/haproxy/errors/504.http
+  
+```
 
 ### frontend
 Defines a reverse proxy that will listen for incoming requests on a certain IP and port.
