@@ -307,3 +307,29 @@ frontend mywebsite
 ```
 
 You could drop the query with `redirect prefix ... drop-query` or by using `redirect location`
+
+#### Rate limit
+```bash
+frontend mywebsite
+  bind *:80
+  default_backend webservers
+  stick-table type ip size 200k expire 120s store conn_rate(3s),bytes_out_rate(60s),http_req_rate(3s)
+  http-request track-sc0 src
+  http-request deny if { sc0_conn_rate gt 60 } # Deny if opened more than 60 connections within 3s
+  http-request deny if { sc0_bytes_out_rate gt 10000000 } # Deny if transfered more than 10M within 60s
+  http-request deny if { sc0_http_req_rate ge 60 } # Deny if more than 60 requests in 3 secs
+```
+
+#### Remember the attack
+```bash
+frontend mywebsite
+  bind *:80
+  default_backend webservers
+  stick-table type ip size 200k expire 2m store conn_rate(3s),gpc0 # save the connectionrate and a boolean
+  acl conn_rate_abuse sc0_conn_rate gt 60
+  acl flag_as_abuser sc0_inc_gpc0 gt 0 # increase counter
+  acl is_abuser src_get_gpc0 gt 0 # check counter
+  http-request track-sc0 src
+  http-request deny if is_abuser
+  http-request deny if conn_rate_abuse flag_as_abuser # mark user
+```
