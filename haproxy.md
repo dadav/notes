@@ -188,6 +188,7 @@ backend webservers
   # Optional tell haproxy which status is ok
   http-check expect status 200 # only 200
   # http-check expect rstatus ^2(\d){2}$ # 2xx
+  # http-check disable-on-404
 ```
 
 You can also rely on another server (from a backend):
