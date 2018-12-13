@@ -48,6 +48,23 @@ global
   tune.ssl.default-dh-param 2048
 ```
 
+###### Tips
+Since version x.x haproxy supports multiprocess & multithreading.
+
+*BUT*
+
+*Caveat 1:* multi-process mode does not support synchronizing stick tables over multiple processes so each process will have it's own making it useless for persistence. However, HTTP cookies are supported so some persistence options do exist.
+
+*Caveat 2:* multi-process mode means the stats page only displays one process per port, and requires additional config to show the different process stats
+You can set these options like this:
+
+```bash
+global
+  nbproc 1 # 1 Process
+  nbthread 4 # 4 Threads
+  cpu-map auto:1/1-4 0-3 # Map threads to first 4 CPU cores (0-3)
+```
+
 ##### defaults
 Here we can configure settings that a reused across all of the proxies.
 
