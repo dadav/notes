@@ -49,7 +49,7 @@ global
 ```
 
 **Tips**
-Since version x.x haproxy supports multiprocess & multithreading.
+Since version 1.8 haproxy supports multiprocess & multithreading. (HAProxy must be compiled with multithreading support. Check with haproxy -vv; compile with USE_THREAD=1)
 
 **BUT**
 
