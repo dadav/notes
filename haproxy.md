@@ -317,6 +317,29 @@ if $programname startswith 'haproxy' then /var/log/haproxy.log
 if $programname startswith 'haproxy' and $syslogseverity <= 3 then /var/log/haproxy_errors.log
 ```
 
+### Socketinteraction
+You can also use netcat...
+
+```bash
+# readline
+socat readline haproxy.socket 
+
+# show informations like haproxy version, PID, current connections, session rates, task
+echo "show info" | socat stdio haproxy.socket
+
+# prints the stats about all frontents and backends (connection statistics etc) in a csv format
+echo "show stat" | socat stdio haproxy.socket
+
+# indeed the following prints informations about errors if there are any
+echo "show errors" | socat stdio haproxy.socket
+
+# show open sessions with the used backend/frontend, the source, etc.
+echo "show sess" | socat stdio haproxy.socket
+
+# disable system
+echo "disable server yourbackendname/yourservername" | socat stdio haproxy.socket
+```
+
 ### Tips
 #### Forward IP
 ```bash
@@ -368,3 +391,4 @@ frontend mywebsite
   http-request deny if is_abuser
   http-request deny if conn_rate_abuse flag_as_abuser # mark user
 ```
+
