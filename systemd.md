@@ -1,3 +1,8 @@
+# Runtime changes
+Change properties on runtime
+```shell
+systemctl set-property --runtime name property=value
+```
 
 # Graph
 Show dependencies in a graph
