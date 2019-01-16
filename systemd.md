@@ -25,3 +25,18 @@ RestartSec=90
 StartLimitInterval=400
 StartLimitBurst=3
 ```
+
+## Escaping
+You can escape strings with
+```shell
+systemd-escape <string>
+```
+Use that escaped string in your service name
+```shell
+servicename@escapedstring.service
+```
+You can use that escaped string in your service like this:
+```shell
+%i -> still escaped
+%I -> unescaped
+```
