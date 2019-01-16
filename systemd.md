@@ -6,3 +6,9 @@ RestartSec=90
 StartLimitInterval=400
 StartLimitBurst=3
 ```
+
+# Graph
+Show dependencies in a graph
+```shell
+systemd-analyze dot sshd.service | dot -Goverlap=false -Tpng | feh -
+```
