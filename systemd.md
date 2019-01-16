@@ -15,4 +15,6 @@ systemd-analyze dot sshd.service | dot -Goverlap=false -Tpng | feh -
 
 # Debug
 Start unit in debug mode
-`SYSTEMD_LOG_LEVEL=debug /lib/systemd/systemd-networkd`
+```shell
+SYSTEMD_LOG_LEVEL=debug /lib/systemd/systemd-networkd
+```
