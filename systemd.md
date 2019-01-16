@@ -1,11 +1,3 @@
-# Retry
-Restart the service 3 times. Wait 90 seconds after each try.
-```shell
-Restart=always
-RestartSec=90
-StartLimitInterval=400
-StartLimitBurst=3
-```
 
 # Graph
 Show dependencies in a graph
@@ -17,4 +9,19 @@ systemd-analyze dot sshd.service | dot -Goverlap=false -Tpng | feh -
 Start unit in debug mode
 ```shell
 SYSTEMD_LOG_LEVEL=debug /lib/systemd/systemd-networkd
+```
+# List
+List enabled units
+```shell
+systemctl list-unit-files --state=enabled
+```
+
+# Unit tweaks
+## Retry
+Restart the service 3 times. Wait 90 seconds after each try.
+```shell
+Restart=always
+RestartSec=90
+StartLimitInterval=400
+StartLimitBurst=3
 ```
