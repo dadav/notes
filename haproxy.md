@@ -341,6 +341,15 @@ echo "disable server yourbackendname/yourservername" | socat stdio haproxy.socke
 ```
 
 ### Tips
+#### Redirect SSL
+```bash
+frontend front1
+  bind *:80 # listen also port 80
+  bind *:443 ssl crt /etc/ssl/cert.pem # and of cource port 443; pem must also contain private key
+  redirect scheme https if !{ ssl_fc } # if not ssl, redirect
+  default_backend nodes # is ssl, use this backend
+```
+
 #### SSL Passh Through
 ```bash
 frontend front1
@@ -353,6 +362,7 @@ backend back1
   option ssl-hello-chk
   server web1 10.10.10.10:443 check
 ```
+
 #### Forward IP
 ```bash
 # httpmode
@@ -365,6 +375,24 @@ frontend
 backend test
   mode tcp
   server web 192.168.40.10:80 send-proxy
+```
+
+#### Apache Proxy
+##### ProxyPass (Client -> Server)
+```bash
+backend back1
+  # ProxyPass /mirror/foo/ http://foobar.com/bar
+  http-request set-header Host foobar.com
+  reqirep  ^([^ :]*)\ /mirror/foo/(.*)     \1\ /\2
+
+```
+
+##### ProxyPassReverse (Server -> Client)
+```bash
+backend back1
+  # ProxyPassReverse /mirror/foo/ http://foobar.com/bar
+  acl hdr_location res.hdr(Location) -m found
+  rspirep ^Location:\ (https?://foobar.com(:[0-9]+)?)?(/.*) Location:\ /mirror/foo3 if hdr_location
 ```
 
 #### Redirect
