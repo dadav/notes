@@ -341,6 +341,18 @@ echo "disable server yourbackendname/yourservername" | socat stdio haproxy.socke
 ```
 
 ### Tips
+#### SSL Passh Through
+```bash
+frontend front1
+  mode tcp
+  bind *:443
+  default_beckend back1
+
+backend back1
+  mode tcp
+  option ssl-hello-chk
+  server web1 10.10.10.10:443 check
+```
 #### Forward IP
 ```bash
 # httpmode
