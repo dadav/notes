@@ -3,6 +3,29 @@
 TIP: You can check the config with `haproxy -f haproxy.cfg -c`
 
 #### sections
+##### userlists
+```bash
+# Create a userlist
+userlist stats-auth
+    # group 1
+    group admin users admin1,admin2 
+    # create a password with python3 -c 'import crypt; print(crypt.crypt("test", crypt.mksalt(crypt.METHOD_SHA512)))'
+    user admin1 password $6$RHsQZCfOwoufxoJg$qqDfmozXaWOcxtVZjUVEotHm6xkur5/rnEJt.fV2.R4TbGmx2IRdzNUe0izFlW8RdZu5Wt.7CPj/KNCmn7thU1 # Password "test"
+    user admin2 insecure-password test # unencrypted
+
+# stats
+listen stats_page
+    # check if already authorized
+    acl AUTH http_auth(stats-auth)
+    # check admin
+    acl AUTH_ADMIN http_auth_group(stats-auth) admin
+    ...
+    # ask for credentials
+    stats http-request auth unless AUTH
+    # is a admin
+    stats admin if AUTH_ADMIN
+```
+
 ##### peers
 The peers section lists multiple haproxy machines and makes it possible to share stick-tables. The peer labes should match the machinenames.
 
