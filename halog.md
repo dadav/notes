@@ -41,5 +41,8 @@ value_back_https/valueas3         # backend / server_name
 
 # server ran in timeout
 <haproxy.log halog -s -1 -q -tcn sH
+
+# Queued connections count
+<haproxy.log halog -s -1 -q -Q -c
 ```
 
