@@ -8,23 +8,23 @@ haproxy[8517]:                    # process_name [pid]
 [01/Mar/2019:01:43:36.041]        # request_date
 value_front_https~                # frontend
 value_back_https/valueas3         # backend / server_name
-0/0/0/70/70                       # timers (TR / Tw / Tc / Tr / Ta)
-# TR: Client request time
-# Tw: Queues time
-# Tc: Connection time (to final server)
-# Tr: Server response time
-# Ta: Request active time (first bytes send - last byte received)
+ 0/0/0/70/70                      # timers (TR / Tw / Tc / Tr / Ta)
+#| | |  |  |--Ta: Request active time (first bytes send - last byte received)    
+#| | |  |-----Tr: Server response time      
+#| | |--------Tc: Connection time (to final server)
+#| |----------Tw: Queues time
+#|------------TR: Client request time
 200                               # status_code
 322                               # bytes_read
 -                                 # captured_request_cookie
 -                                 # captured_response_cookie
 ----                              # termination_state
 10/10/0/1/0                       # counters (actconn / feconn / beconn / srv_conn / retries)
-# actconn: connections on the process
-# feconn: connections on frontend
-# beconn: connections on backend
-# srv_conn: active connections
-# retries: ~~~
+#|  | | | |--retries: ~~~
+#|  | | |----srv_conn: active connections
+#|  | |------beconn: connections on backend
+#|  |--------feconn: connections on frontend 
+#|-----------actconn: connections on the process
 0/0                               # srv_queue / backend_queue
 {}                                # captured_request_headers
 {}                                # captured_response_headers
