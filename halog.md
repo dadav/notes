@@ -30,3 +30,16 @@ value_back_https/valueas3         # backend / server_name
 {}                                # captured_response_headers
 "GET /vmweb/vmwebHTTP/1.1"        # http_request
 ```
+
+### Examples
+```bash
+# show top 5 urls with error, sort by request count
+<haproxy.log halog -s -1 -u -e -q | sort -n | tail -5
+
+# show missing files
+<haproxy.log halog -s -1 -u -q -H -hs 404
+
+# server ran in timeout
+<haproxy.log halog -s -1 -q -tcn sH
+```
+
