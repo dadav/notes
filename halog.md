@@ -18,7 +18,7 @@ value_back_https/valueas3         # backend / server_name
 322                               # bytes_read
 -                                 # captured_request_cookie
 -                                 # captured_response_cookie
-----                              # termination_state
+----                              # termination_state (https://cbonte.github.io/haproxy-dconv/1.8/configuration.html#8.5)
 10/10/0/1/0                       # counters (actconn / feconn / beconn / srv_conn / retries)
 #|  | | | |--retries: ~~~
 #|  | | |----srv_conn: active connections
