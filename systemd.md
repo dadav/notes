@@ -82,3 +82,18 @@ You can use that escaped string in your service like this:
 %i -> still escaped
 %I -> unescaped
 ```
+
+## User process
+```slice
+# /etc/systemd/logind.conf
+KillUserProcesses=no
+
+# enable user
+loginctl enable-linger <username>
+
+# create files
+mkdir -p ~/.config/systemd/user/
+touch ~/.config/systemd/user/blub.service
+systemctl --user daemon-reload
+systemctl --user start blub.service
+```
