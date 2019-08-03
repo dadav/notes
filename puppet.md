@@ -63,4 +63,7 @@ EOS
     expect(@result.exit_code).to be_zero
   end
 end
+
+# BEAKER_PUPPET_COLLECTION=puppet pdk bundle exec rake beaker:docker
+# 
 ``` 
