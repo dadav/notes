@@ -21,3 +21,18 @@ sub vcl_backend_response {
   return(deliver);
 }
 ```
+
+# considerate device type
+```shell
+sub vcl_recv {
+  if(req.http.user-agent ~ "Phone|Android|Mobile"){
+    set req.http.Device = "Mobile";
+  } else {
+    set req.http.Device = "Desktop";
+  }
+}
+
+sub vcl_hash {
+  hash_data(req.http.Device);
+}
+```
