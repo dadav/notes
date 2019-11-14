@@ -36,3 +36,13 @@ sub vcl_hash {
   hash_data(req.http.Device);
 }
 ```
+
+# Don't cache if auth or cookie
+```shell
+sub vcl_recv {
+    if (req.http.Authorization || req.http.Cookie) {
+        /* Not cacheable by default */
+        return (pass);
+    }
+}
+```
