@@ -64,3 +64,13 @@ SSLProtocol –ALL +TLSv1.2
 a2enmod unique_id
 a2enmod security2
 ```
+
+`/etc/apache2/conf.d/mod_security2.conf`
+```conf
+# activate rules
+SecRuleEngine On
+
+# disable Server header
+SecServerSignature " "
+```
+
