@@ -50,4 +50,17 @@ RewriteRule .* - [F]
 
 # set low timeout (slow loris)
 Timeout 60
+
+# ssl
+SSLCertificateFile #Certificate signed by authority
+SSLCertificateChainFile #Certificate signer given by authority
+SSLCertificateKeyFile #Key file which you generated above
+SSLCipherSuite HIGH:!MEDIUM:!aNULL:!MD5:!RC4
+SSLProtocol –ALL +TLSv1.2
+```
+
+# mod_security2
+```shell
+a2enmod unique_id
+a2enmod security2
 ```
