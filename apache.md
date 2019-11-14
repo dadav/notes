@@ -52,6 +52,7 @@ RewriteRule .* - [F]
 Timeout 60
 
 # ssl
+SSLEngine On
 SSLCertificateFile #Certificate signed by authority
 SSLCertificateChainFile #Certificate signer given by authority
 SSLCertificateKeyFile #Key file which you generated above
