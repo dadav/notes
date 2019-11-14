@@ -1,3 +1,8 @@
+# docs
+[VCL](https://varnish-cache.org/docs/trunk/users-guide/vcl.html)
+
+
+
 # cache jpg's
 ```shell
 sub vcl_recv {
@@ -37,7 +42,7 @@ sub vcl_hash {
 }
 ```
 
-# Don't cache if auth or cookie
+# don't cache if auth or cookie
 ```shell
 sub vcl_recv {
     if (req.http.Authorization || req.http.Cookie) {
