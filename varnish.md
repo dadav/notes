@@ -51,3 +51,24 @@ sub vcl_recv {
     }
 }
 ```
+
+# redirect
+[source](https://varnish-cache.org/tips/vcl/redirect.html)
+```shell
+sub vcl_recv {
+    if (req.url ~ "^/installation/ubuntu") {
+        return (synth(301, "/releases/install_ubuntu.html"));
+    }
+    if (req.url ~ "^/installation/debian") {
+        return (synth(302, "/releases/install_redhat.html"));
+    }
+}
+
+sub vcl_synth {
+    if (resp.status == 301 || resp.status == 302) {
+        set resp.http.location = resp.reason;
+        set resp.reason = "Moved";
+        return (deliver);
+    }
+}
+```
