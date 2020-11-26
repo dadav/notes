@@ -54,4 +54,7 @@ expac -H M '%m\t%n' | sort -h
 
 # last installed packages
 expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort | tail -n 20
+
+# modified files
+pacman -Qii | awk '/^MODIFIED/ {print $2}'
 ```
