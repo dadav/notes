@@ -67,3 +67,8 @@ end
 # BEAKER_PUPPET_COLLECTION=puppet pdk bundle exec rake beaker:docker
 # 
 ``` 
+
+# local module execution
+```bash
+puppet apply --modulepath ./modules --hiera_config ./hiera.yml -e 'include my_module'
+```
