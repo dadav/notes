@@ -1,5 +1,7 @@
 # pacman
+
 ## cache
+
 ```bash
 # delete old cache
 pacman -Sc
@@ -9,6 +11,7 @@ pacman -Scc
 ```
 
 ## query
+
 ```bash
 # show all installed packages
 pacman -Q
@@ -39,6 +42,7 @@ pacman -Fx regex
 ```
 
 ## remove
+
 ```bash
 # remove package and unneeded deps
 pacman -Rs package
@@ -48,6 +52,7 @@ pacman -Rss package
 ```
 
 ## extra
+
 ```bash
 # packages by size
 expac -H M '%m\t%n' | sort -h
@@ -57,4 +62,9 @@ expac --timefmt='%Y-%m-%d %T' '%l\t%n' | sort | tail -n 20
 
 # modified files
 pacman -Qii | awk '/^MODIFIED/ {print $2}'
+
+# download only
+pacman -Syuw --no-confirm
 ```
+
+
