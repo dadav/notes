@@ -67,4 +67,9 @@ pacman -Qii | awk '/^MODIFIED/ {print $2}'
 pacman -Syuw --no-confirm
 ```
 
+# aur packages
 
+```bash
+# update only aur packages
+yay -Sua
+```
