@@ -72,4 +72,7 @@ pacman -Syuw --no-confirm
 ```bash
 # update only aur packages
 yay -Sua
+
+# clean unneeded deps
+yay -Ys
 ```
