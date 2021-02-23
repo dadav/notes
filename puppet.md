@@ -72,3 +72,8 @@ end
 ```bash
 puppet apply --modulepath ./modules --hiera_config ./hiera.yml -e 'include my_module'
 ```
+
+# test custom facts
+```bash
+FACTERLIB=local/dir facter -p fact_name
+```
