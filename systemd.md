@@ -111,6 +111,6 @@ PID_PROC1=$!
 proc2 &
 PID_PROC2=$!
 
-# watch the pids and exit if one fails
+# watch the pids and exit if one exits
 wait -n $PID_PROC1 $PID_PROC2
 ```
