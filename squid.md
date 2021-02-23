@@ -2,7 +2,7 @@
 https://wiki.archlinux.org/index.php/squid
 
 # options you probably want to use
-```squidconf
+```coffee
 # in-memory cache
 cache_mem 64 MB
 # upstream proxy
