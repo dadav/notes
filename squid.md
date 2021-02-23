@@ -19,8 +19,10 @@ cache_dir diskd /cache0 200000 16 256
 ```bash
 # syntax check
 squid -k check
+
 # create cache directories
 squid -z
+
 # reload config
 squid -k reconfigure
 
