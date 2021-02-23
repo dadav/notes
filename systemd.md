@@ -84,7 +84,7 @@ You can use that escaped string in your service like this:
 ```
 
 ## User process
-```slice
+```bash
 # /etc/systemd/logind.conf
 KillUserProcesses=no
 
@@ -96,4 +96,21 @@ mkdir -p ~/.config/systemd/user/
 touch ~/.config/systemd/user/blub.service
 systemctl --user daemon-reload
 systemctl --user start blub.service
+```
+
+## Script hacks
+Sometimes you want to start multiple processes and exit if one of them fails.
+```bash
+#!/bin/bash
+
+set -e
+
+proc1 &
+PID_PROC1=$!
+
+proc2 &
+PID_PROC2=$!
+
+# watch the pids and exit if one fails
+wait -n $PID_PROC1 $PID_PROC2
 ```
