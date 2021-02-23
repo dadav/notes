@@ -1,3 +1,6 @@
+# wiki
+https://wiki.archlinux.org/index.php/squid
+
 # options you probably want to use
 ```squidconf
 # in-memory cache
