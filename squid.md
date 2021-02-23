@@ -4,6 +4,7 @@
 cache_mem 64 MB
 # upstream proxy
 cache_peer 10.1.1.100 parent 8080 0 no-query default login=user:password
+# tells the cache to never go direct to the internet to retrieve a page
 never_direct allow all
 # max object size in cache
 maximum_object_size 10 MB
