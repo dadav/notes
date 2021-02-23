@@ -19,4 +19,10 @@ squid -k check
 squid -z
 # reload config
 squid -k reconfigure
+
+# utilization
+squidclient -h localhost cache_object://localhost/ mgr:utilization
+
+# some infos
+squidclient -h localhost cache_object://localhost/ mgr:info
 ```
