@@ -12,6 +12,37 @@
 6. post_tasks
 7. handlers of post_tasks
 
+### useful tasks
+
+#### Rebooting
+
+```yaml
+- name: Reboot a slow machine that might have lots of updates to apply
+  reboot:
+    reboot_timeout: 3600
+```
+
+#### Flush handlers
+
+```yaml
+- name: Force all notified handlers to run at this point, not waiting for normal sync points
+  meta: flush_handlers
+```
+
+#### Group hosts by facts
+
+```yaml
+- hosts: all
+  tasks
+  - name: Create a group of all hosts by operating system
+    group_by: key={{ansible_distribution}}
+
+- hosts: Ubuntu
+  tasks
+  - debug: msg=foo
+    
+```
+
 ## useful commands
 ```bash
 # show docs for a module
