@@ -56,7 +56,7 @@ ansible-doc -t callback -l
 
 There are some things you can do to increase performance.
 
-## turn of gather_facts
+## turn off gather_facts
 
 ## parallelism
 
