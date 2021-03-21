@@ -56,7 +56,25 @@ ansible-doc -t callback -l
 
 There are some things you can do to increase performance.
 
+## use mitogen
+
+Mitogen updates Ansible’s slow and wasteful shell-centric implementation with pure-Python equivalents...
+
+1. Download [mitogen](https://networkgenomics.com/try/mitogen-0.2.9.tar.gz)
+2. Change the configuration
+
+```ini
+[defaults]
+strategy_plugins = /path/to/mitogen-0.2.9/ansible_mitogen/plugins/strategy
+strategy = mitogen_linear
+```
+
 ## turn off gather_facts
+
+```yaml
+- hosts: all
+  gather_facts: false
+```
 
 ## parallelism
 
