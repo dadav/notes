@@ -105,6 +105,18 @@ Sometimes you want to start multiple processes and exit if one of them fails.
 
 set -e
 
+function wait_any_pid() {
+  while [[ $# -ne 0 ]]; do
+    for pid in "$@"; do
+      if ! kill -s 0 "$pid" 2>/dev/null; then
+        return 0
+      fi
+    done
+    sleep 1
+  done
+  return 1
+}
+
 proc1 &
 PID_PROC1=$!
 
@@ -112,5 +124,5 @@ proc2 &
 PID_PROC2=$!
 
 # watch the pids and exit if one exits
-wait -n $PID_PROC1 $PID_PROC2
+wait_any_pid $PID_PROC1 $PID_PROC2
 ```
