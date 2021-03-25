@@ -1,5 +1,17 @@
 # settings
 
+## separation
+
+- network.cookie.cookieBehavior = 5
+- privacy.partition.network_state = true 
+
+## security
+
+- media.peerconnection.enabled = false
+- network.dns.disablePrefetch = true
+- network.prefetch-next = false
+- webgl.disabled = true
+
 ## performance
 
 If animations like progressbars stutter af, set `privacy.trackingprotection.enabled` to **false**
