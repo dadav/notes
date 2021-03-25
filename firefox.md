@@ -1,15 +1,15 @@
 # must have addons
 
 ## anti trackers
-https://addons.mozilla.org/de/firefox/addon/clearurls/
-https://addons.mozilla.org/de/firefox/addon/sponsorblock/
-https://addons.mozilla.org/de/firefox/addon/privacy-badger17
+- https://addons.mozilla.org/de/firefox/addon/clearurls/
+- https://addons.mozilla.org/de/firefox/addon/sponsorblock/
+- https://addons.mozilla.org/de/firefox/addon/privacy-badger17
 
 ## encryption
 
-https://addons.mozilla.org/de/firefox/addon/https-everywhere/
+- https://addons.mozilla.org/de/firefox/addon/https-everywhere/
 
 ## ads / scripts
 
-https://addons.mozilla.org/de/firefox/addon/ublock-origin/
-https://addons.mozilla.org/de/firefox/addon/noscript/
+- https://addons.mozilla.org/de/firefox/addon/ublock-origin/
+- https://addons.mozilla.org/de/firefox/addon/noscript/
