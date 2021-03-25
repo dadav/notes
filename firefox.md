@@ -17,3 +17,4 @@
 ## misc
 
 - https://addons.mozilla.org/de/firefox/addon/single-file/
+- https://addons.mozilla.org/de/firefox/addon/tampermonkey/
