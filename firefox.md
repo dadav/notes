@@ -13,3 +13,7 @@
 
 - https://addons.mozilla.org/de/firefox/addon/ublock-origin/
 - https://addons.mozilla.org/de/firefox/addon/noscript/
+
+## misc
+
+- https://addons.mozilla.org/de/firefox/addon/single-file/
