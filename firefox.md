@@ -1,3 +1,9 @@
+# settings
+
+## performance
+
+If animations like progressbar stutter af, set `privacy.trackingprotection.enabled` to **false**
+
 # must have addons
 
 ## anti trackers
