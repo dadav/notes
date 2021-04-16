@@ -1,9 +1,13 @@
 # settings
 
+## fix context menu disapearing bug
+
+- ui.context_menus.after_mouseup = true
+
 ## separation
 
 - network.cookie.cookieBehavior = 5
-- privacy.partition.network_state = true 
+- privacy.partition.network_state = true
 
 ## security
 
