@@ -64,7 +64,7 @@ Restart the service 3 times. Wait 90 seconds after each try.
 ```shell
 Restart=always
 RestartSec=90
-StartLimitInterval=400
+StartLimitInterval=400 # in newer systemd versions this is renamed to StartLimitIntervalSec; use 0 if you want endless restarts
 StartLimitBurst=3
 ```
 
