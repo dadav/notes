@@ -15,6 +15,7 @@
 - network.dns.disablePrefetch = true
 - network.prefetch-next = false
 - webgl.disabled = true
+- pdfjs.enableScripting = false
 
 ## performance
 
