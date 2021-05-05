@@ -34,6 +34,19 @@ iptables -L -n -v --line-numbers
 iptables -D $CHAIN $NUMBER
 ```
 
+## natting
+
+```bash
+# eth1 = no internet; eth0 = internet
+# be sure to: echo 1 > /proc/sys/net/ipv4/ip_forward
+# change source ip to ours
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+# allow forwarding for eth1
+iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
+# forward pakets for established connections
+iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT
+```
+
 ## snippets
 
 ```bash
