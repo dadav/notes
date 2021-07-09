@@ -23,5 +23,6 @@ function wait_for_port() {
 
 # see my login-shell is doing
 ```BASH
-PS4='+ $BASH_SOURCE:$LINENO:' BASH_XTRACEFD=1 bash -xlic ""
+PS4='+ $BASH_SOURCE:$LINENO:' BASH_XTRACEFD=7 bash -xlic "" 7>trace.log
+less trace.log
 ```
