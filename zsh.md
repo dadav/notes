@@ -1,4 +1,25 @@
-# globbing
+# Why would you use zsh?
+
+## global aliases
+
+```shell
+# run this command quietly
+alias -g Q='>/dev/null 2>&1'
+# ex: sleep 1000 Q
+
+# move latest file to foo
+alias -g NF='*(.om[1])'
+# ex: mv NF foo/
+```
+
+## fileext aliases
+
+```shell
+# open files with these extensions with nvim
+alias -s {xml,json,yml,yaml}=nvim
+```
+
+## globbing
 
 Read more about this in `man zshexpn` (took me quite some time to find the correct manpage)
 
