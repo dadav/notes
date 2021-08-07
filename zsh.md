@@ -1,58 +1,65 @@
-source: http://zzapper.co.uk/101ZshGlobs.php
-
 # globbing
 
-## by size
-
-### bytes
+Read more about this in `man zshexpn` (took me quite some time to find the correct manpage)
 
 ```shell
 # empty files
 ls *(.L0)
+
 # empty files + dotfiles (D)
 ls *(.DL0)
+
 # empty files; recursively
 ls **(.L0)
+
 # files smaller than 20 bytes
 ls -l *(.L-20)
-# files exactly 20 bytes
-ls -l *(.L20)
-# files larger than 20 bytes
-ls -l *(.L+20)    # list file size more than 20 bytes 
-```
 
-### kilobytes
+# files larger than 20 kilobytes
+ls -l *(.Lk+20)
 
-```shell
-# files larger than 100KB
-ls -l *(Lk+100)
-# files smaller than 100KB
-ls -l *(Lk-100)
-```
-
-
-### megabytes
-
-```shell
 # files larger than 2MB
 ls -l *(Lm+2)
-# files smaler than 2MB
-ls -l *(Lm-2)
-```
 
-### ordering
-
-```shell
 # smallest file
-ls -lhS *(.oL[1])
+ls -l *(.oL[1])
+
 # biggest file
-ls -lhS *(.OL[1])
-# biggest file recursively
-ls -lhS **(.OL[1])
+ls -l *(.OL[1])
+
+# oldest file
+ls -l *(.Om[1])
+
+# latest file
+ls -l *(.om[1])
+
 # biggest file recursively; exclude foo
-ls -lhS **~(foo/*)(.OL[1])
-# ten biggets files; exclude foo
-ls -hlS **~(foo/*)(.OL[1,10])
-# five largest files in .php or .inc dir; exclude libs and locallibs
-ls -lS **.(php|inc)~(libs|locallibs)/*(.OL[1,5])
+ls -lhS **/*~(foo/*)(.OL[1])
+
+# modified in the last minute (m=minutes,d=days(default),w=week,M=Month)
+ls *(.mm0)
+
+# modified today
+ls *(.m0)
+
+# not modified today
+ls *(.^md0)
+
+# filepermissions 644
+ls *(.f644)
+
+# group: root
+ls *(.g:root:)
+
+# user: apache
+ls *(.u:apache:)
+
+# all files without group write perms
+ls **(.:g-w:)
+
+# move logs older than 3 weeks to old/
+mv *.log(.mw+3) old/
+
+# only print file that succeed the given command
+ls *(e:'[[ -e $REPLY ]]':)
 ```
