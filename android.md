@@ -69,6 +69,8 @@ cat "$smali_file"
 
 #### examples
 
+#### make a string comparison
+
 ```smali
 // register counter
 .locals 5
@@ -98,6 +100,26 @@ return v1
 Can you just add `registers` as you wish? No. In the beginning of the method you have so specify the
 number of registers you used. But why are there 5 registers in this example? You forgot about
 Dre..em `this`, which always be `v0` in non-static-methods.
+
+#### put true in a variable
+
+```smali
+sget-object p1, Ljava/lang/Boolean;->TRUE:Ljava/lang/Boolean;
+```
+
+#### print log message
+
+```smali
+// create a tag
+const-string v0, "log-tag"
+
+// get the string of v1 and save it into v2
+invoke-static {v1}, Ljava/lang/String;->valueOf(I)Ljava/lang/String;
+move-result-object v2
+
+// Log (currently debug; change it e.g. to i) v2
+invoke-static {v0, v2}, Landroid/util/Log;->d(Ljava/lang/String;Ljava/lang/String;)I
+```
 
 ### compile it again
 
