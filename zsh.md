@@ -84,3 +84,23 @@ mv *.log(.mw+3) old/
 # only print file that succeed the given command
 ls *(e:'[[ -e $REPLY ]]':)
 ```
+
+## cool tools
+
+Be sure to check out the `zshcontrib` manpage.
+
+```shell
+# rename files easily with zmv (-n for dryrun)
+# zcp, zln also exist
+zmv -n 'JoJO_E(*).mp4' 'JoJo_S01E$1.mp4'
+
+# use zsh's awesome glob functionality and run commands for each file
+# this is like xargs, but for commandline arguments (xargs uses stdin)
+zargs -- **/*(.) -- ls -ld --
+
+```
+
+## shortcuts
+
+* **Ctrl+t**: Search for files
+* **Alt+h**: Open manpage for current command
