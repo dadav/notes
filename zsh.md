@@ -98,6 +98,8 @@ zmv -n 'JoJO_E(*).mp4' 'JoJo_S01E$1.mp4'
 # this is like xargs, but for commandline arguments (xargs uses stdin)
 zargs -- **/*(.) -- ls -ld --
 
+# live variable editing
+vared PATH
 ```
 
 ## shortcuts
