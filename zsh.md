@@ -102,7 +102,16 @@ zargs -- **/*(.) -- ls -ld --
 vared PATH
 ```
 
+## binding keys
+
+```shell
+# press Ctrl-xb to auto-type "bindkey" into the current shell
+bindkey -s '\C-xb' bindkey
+
+```
+
 ## shortcuts
 
 * **Ctrl+t**: Search for files
 * **Alt+h**: Open manpage for current command
+* **Alt+q**: Hide current command, execute something else, bring back old one
