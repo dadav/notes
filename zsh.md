@@ -102,6 +102,13 @@ zargs -- **/*(.) -- ls -ld --
 vared PATH
 ```
 
+## expansion
+
+```shell
+# get the full path of a command
+echo =ls
+```
+
 ## binding keys
 
 ```shell
