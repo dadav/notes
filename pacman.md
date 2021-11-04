@@ -65,6 +65,9 @@ pacman -Qii | awk '/^MODIFIED/ {print $2}'
 
 # download only
 pacman -Syuw --no-confirm
+
+# fix gpg key issues
+pacman-key --refresh-keys
 ```
 
 # aur packages
