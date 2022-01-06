@@ -12,6 +12,10 @@
 6. post_tasks
 7. handlers of post_tasks
 
+### variables
+
+* ansible_all_ipv4_addresses
+
 ### useful tasks
 
 #### Rebooting
