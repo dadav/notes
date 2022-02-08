@@ -47,6 +47,25 @@ List.generate(100, (index) {
 }
 ```
 
+## extension
+
+```dart
+// extend enum to be able to use foo.totext(), which converts the enum to a String
+enum MyEnum {
+  val1,
+  val2,
+  val3,
+}
+
+extension MyEnumExt on MyEnum {
+  String toText() {
+    String lower = describeEnum(this);
+
+    return '${lower[0].toUpperCase()}${lower.substring(1)}';
+  }
+}
+```
+
 ## misc
 
 ```dart
