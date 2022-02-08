@@ -66,6 +66,14 @@ extension MyEnumExt on MyEnum {
 }
 ```
 
+## spread operator
+
+```dart
+// you can use ... to unpack lists and maps
+List<int> a = [1, 2, 3];
+List<int> b = [...a, 4, 5, 6];
+```
+
 ## misc
 
 ```dart
