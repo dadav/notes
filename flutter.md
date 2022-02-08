@@ -47,4 +47,13 @@ List.generate(100, (index) {
 }
 ```
 
+## misc
+
+```dart
+// asign value; default for null
+bool foo = variable?? false;
+
+// asign value depending on a condition
+bool foo = condition ? cond_ok_value : cond_fail_value;
+```
 
