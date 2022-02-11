@@ -12,6 +12,9 @@ flutter pub get
 
 # run project
 flutter run
+
+# upgrade packages / fetch new master code from git source
+flutter packages upgrade
 ```
 
 # cool widgets
