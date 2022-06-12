@@ -1,28 +1,55 @@
+# systemd
+
+## units
+
+### states
+
+A unit can be in the following states:
+
+![Unit states](./images/unit_states.png)
+
+### types
+
+The type of an unit controls the time when the unit switches
+from `activating` to `active` state.
+
+systemd always uses the `fork` and `execve` syscalls to start
+the process of an unit.
+
+![Types](./images/systemd_activation.png)
+
 # Runtime changes
+
 Change properties on runtime
 ```shell
 systemctl set-property --runtime name property=value
 ```
 
 # Graph
+
 Show dependencies in a graph
 ```shell
 systemd-analyze dot sshd.service | dot -Goverlap=false -Tpng | feh -
 ```
 
 # Debug
+
 Start unit in debug mode
 ```shell
 SYSTEMD_LOG_LEVEL=debug /lib/systemd/systemd-networkd
 ```
+
 # List
+
 List enabled units
 ```shell
 systemctl list-unit-files --state=enabled
 ```
 
 # Unit tweaks
+
 ## Resources
+
 ```shell
 # Per user/process limits
 ## Directive        ulimit equivalent     Unit
@@ -60,6 +87,7 @@ IOWeight=100
 ```
 
 ## Retry
+
 Restart the service 3 times. Wait 90 seconds after each try.
 ```shell
 Restart=always
@@ -69,21 +97,28 @@ StartLimitBurst=3
 ```
 
 ## Escaping
+
 You can escape strings with
+
 ```shell
 systemd-escape <string>
 ```
+
 Use that escaped string in your service name
+
 ```shell
 servicename@escapedstring.service
 ```
+
 You can use that escaped string in your service like this:
+
 ```shell
 %i -> still escaped
 %I -> unescaped
 ```
 
 ## User process
+
 ```bash
 # /etc/systemd/logind.conf
 KillUserProcesses=no
@@ -99,6 +134,7 @@ systemctl --user start blub.service
 ```
 
 ## Script hacks
+
 Sometimes you want to start multiple processes and exit if one of them fails.
 ```bash
 #!/bin/bash

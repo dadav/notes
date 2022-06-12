@@ -7,13 +7,15 @@
 iptables -P INPUT ACCEPT
 iptables -P FORWARD ACCEPT
 iptables -P OUTPUT ACCEPT
-# flush everyting
+
+# delete the default chains
 iptables -F
 iptables -t nat -F
 iptables -t mangle -F
 iptables -t raw -F
 iptables -Z
-# delete everything
+
+# delete the manually created chains
 iptables -X
 iptables -t nat -X
 iptables -t mangle -X
@@ -60,7 +62,6 @@ iptables -A INPUT -p tcp --syn -j LOG --log-prefix "[NEW_CONNECTION (IN)]: "
 ## firewall
 
 ```bash
-
 #!/bin/bash
 
 # Vars
