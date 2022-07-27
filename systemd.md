@@ -89,6 +89,10 @@ IOWeight=100
 ## Retry
 
 Restart the service 3 times. Wait 90 seconds after each try.
+The important part here is, that `RestartSec` * `StartLimitBurst` is always less than `StartLimitInterval`.
+If this is not the case and the service restarts too often (more than `StartLimitBurst` times in `StartLimitInterval` seconds),
+the restart routine will be stopped completly.
+
 ```shell
 Restart=always
 RestartSec=90
