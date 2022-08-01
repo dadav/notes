@@ -88,17 +88,51 @@ IOWeight=100
 
 ## Retry
 
-Restart the service 3 times. Wait 90 seconds after each try.
-The important part here is, that `RestartSec` * `StartLimitBurst` is always less than `StartLimitInterval`.
-If this is not the case and the service restarts too often (more than `StartLimitBurst` times in `StartLimitInterval` seconds),
-the restart routine will be stopped completly.
+`StartLimitInterval` is a moving window. In this window, the number of restarts is limited by `StartLimitBurst`.
+The time between these restarts is defined by `RestartSec`.
+
+*Example*
+
+If my service restarts more than 3 times in 1 minute, stop restarting.
 
 ```shell
 Restart=always
-RestartSec=90
-StartLimitInterval=400 # in newer systemd versions this is renamed to StartLimitIntervalSec; use 0 if you want endless restarts
+RestartSec=0 # immediately restart after failure
+StartLimitInterval=60 # in newer systemd versions this is renamed to StartLimitIntervalSec; use 0 if you want endless restarts
 StartLimitBurst=3
 ```
+
+Now imagine a service which fails after 1 second, this would happen:
+
+* 0s: service is started
+* 1s: service fails and gets restarted
+* 2s: service fails and gets restarted
+* 3s: service fails and gets restarted
+* 4s: service fails; limit is reached
+
+If we want this service to never reach the limit, even when it fails every second, we could change either:
+
+* set the burst limit to a value greater or equal to the window:
+
+`StartLimitBurst=60`
+
+*result:* at second 61, the restart counter is decreased by 1 (because the first restart was 60s ago, at second 1) and also increased because of the current restart. So it does not change, but we are right on the edge.
+
+or
+
+* set the restart interval to a value which makes this true : `RestartSec (x) * StartLimitBurst (3) >= StartLimitInterval (60)`
+
+`RestartSec=20`
+
+*result:* the 4th restart would be on second 81, when we already have another free restart slot.
+
+or 
+
+`StartLimitInterval=0`
+
+endless restarts....
+
+![Restart check](./images/restart.png)
 
 ## Escaping
 
